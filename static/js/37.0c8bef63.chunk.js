@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_coreui_coreui_free_react_admin_template=self.webpackChunk_coreui_coreui_free_react_admin_template||[]).push([[37],{81037:function(e,r,t){t.r(r);t(72791),t(59434);var a=t(80184);r.default=function(){return(0,a.jsx)("h1",{children:"This is a Center page"})}}}]);
+//# sourceMappingURL=37.0c8bef63.chunk.js.map

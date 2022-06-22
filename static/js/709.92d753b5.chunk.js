@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_coreui_coreui_free_react_admin_template=self.webpackChunk_coreui_coreui_free_react_admin_template||[]).push([[709],{98709:function(e,a,r){r.r(a);var t=r(72791),n=r(59434),c=r(80184);a.default=function(){var e=(0,n.v9)((function(e){return e.dropDownData.selected}));return(0,t.useEffect)((function(){console.log("submitstatechanged call api member page",e.name)}),[e]),(0,c.jsx)(c.Fragment,{children:(0,c.jsx)("h1",{children:"This is a Memeber Page"})})}}}]);
+//# sourceMappingURL=709.92d753b5.chunk.js.map
