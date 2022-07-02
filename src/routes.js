@@ -1,7 +1,7 @@
-import { element } from 'prop-types'
-import React from 'react'
+import { element } from "prop-types";
+import React from "react";
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 // const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 // const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -51,21 +51,20 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 // const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
-const Offices = React.lazy(()=>import('./views/offices/Office'))
-const Staff = React.lazy(()=>import('./views/staff/Staff'))
-const Center = React.lazy(()=>import('./views/centers/Center'))
-const Member = React.lazy(()=>import('./views/members/Member'))
+const Offices = React.lazy(() => import("./views/offices/Office"));
+const Staff = React.lazy(() => import("./views/staff/Staff"));
+const Center = React.lazy(() => import("./views/centers/Center"));
+const Member = React.lazy(() => import("./views/members/Member"));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  { path: "/", exact: true, name: "Home" },
+  { path: "/dashboard", name: "Dashboard", element: Dashboard },
 
-  { path: '/details', name: 'Details', element:Offices, exact:true },
-  { path:'/details/offices',name:"Office",element:Offices},
-  { path:'/details/staff',name:"Staff",element:Staff},
-  { path:'/details/centers',name:"Centers",element:Center},
-  { path:'/details/members',name:"Members",element:Member},
-  
-]
+  { path: "/details", name: "Details", element: Offices, exact: true },
+  { path: "/details/offices", name: "Office", element: Offices },
+  { path: "/details/staff", name: "Staff", element: Staff },
+  { path: "/details/centers", name: "Centers", element: Center },
+  { path: "/details/members", name: "Members", element: Member },
+];
 
-export default routes
+export default routes;

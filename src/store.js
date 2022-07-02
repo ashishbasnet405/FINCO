@@ -23,7 +23,6 @@ const changeState = (state = initialState, { type, ...rest }) => {
     }
 
     case "getJobStatus": {
-      // console.log("job state redux payload", rest);
       return { ...state, jobStatus: rest };
     }
 
