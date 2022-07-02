@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/finco/static/css/main.ce3a8ca5.css",
-    "main.js": "/finco/static/js/main.80af0bd1.js",
+    "main.js": "/finco/static/js/main.da787413.js",
     "static/css/989.90c678da.chunk.css": "/finco/static/css/989.90c678da.chunk.css",
     "static/js/989.a087edec.chunk.js": "/finco/static/js/989.a087edec.chunk.js",
-    "static/js/606.92300b6a.chunk.js": "/finco/static/js/606.92300b6a.chunk.js",
+    "static/js/606.2af9442a.chunk.js": "/finco/static/js/606.2af9442a.chunk.js",
     "static/js/9.d6469af2.chunk.js": "/finco/static/js/9.d6469af2.chunk.js",
     "static/js/1.06991b04.chunk.js": "/finco/static/js/1.06991b04.chunk.js",
     "static/js/188.46a9c346.chunk.js": "/finco/static/js/188.46a9c346.chunk.js",
@@ -32,10 +32,10 @@
     "static/media/index.cjs": "/finco/static/media/index.378961ec099f1e66415b.cjs",
     "index.html": "/finco/index.html",
     "main.ce3a8ca5.css.map": "/finco/static/css/main.ce3a8ca5.css.map",
-    "main.80af0bd1.js.map": "/finco/static/js/main.80af0bd1.js.map",
+    "main.da787413.js.map": "/finco/static/js/main.da787413.js.map",
     "989.90c678da.chunk.css.map": "/finco/static/css/989.90c678da.chunk.css.map",
     "989.a087edec.chunk.js.map": "/finco/static/js/989.a087edec.chunk.js.map",
-    "606.92300b6a.chunk.js.map": "/finco/static/js/606.92300b6a.chunk.js.map",
+    "606.2af9442a.chunk.js.map": "/finco/static/js/606.2af9442a.chunk.js.map",
     "9.d6469af2.chunk.js.map": "/finco/static/js/9.d6469af2.chunk.js.map",
     "1.06991b04.chunk.js.map": "/finco/static/js/1.06991b04.chunk.js.map",
     "188.46a9c346.chunk.js.map": "/finco/static/js/188.46a9c346.chunk.js.map",
@@ -56,6 +56,6 @@
   },
   "entrypoints": [
     "static/css/main.ce3a8ca5.css",
-    "static/js/main.80af0bd1.js"
+    "static/js/main.da787413.js"
   ]
 }
