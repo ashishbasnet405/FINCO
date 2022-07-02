@@ -42,11 +42,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("handle submit");
     try {
       const response = await fincoLogin.post(
         "/finco/api/staff/login?detail=true",
         details
       );
+      console.log("login response", response);
       if (response.data.token) {
         localStorage.setItem(
           "fincoLoginDetails",
@@ -60,7 +62,7 @@ const Login = () => {
         type: "setModal",
         status: !modalState,
         statusCode: err.response.status,
-        message: err.response.data.message,
+        message: err.response.data,
       });
     }
   };
