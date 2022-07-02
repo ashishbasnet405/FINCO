@@ -43,37 +43,14 @@ export const getToken = () => {
   }
 };
 
-// export const downloadExcel = ({data,sheetName,fileName}) => {
-//     // const res = trans();
-//       if(data){
-//         const fileType ="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-
-//         //first create the worksheet
-//        const workSheet = XLSX.utils.json_to_sheet(data) //data may be the state
-
-//        //second create the workBook
-//        const workBook  = XLSX.utils.book_new()
-
-//        //third append the worksheet in work book with name
-//        XLSX.utils.book_append_sheet(workBook,workSheet,sheetName) //sheet name
-
-//        XLSX.utils.h
-
-//        //create a buffer to deal with bulk data
-//        let buf = XLSX.write(workBook,{bookType:"xlsx",type:"buffer"})
-
-//        //write a workbook data i.e. binary string
-//        XLSX.write(workBook,{bookType:"xlsx",type:"binary"})
-
-//        //download a file
-//        XLSX.writeFile(workBook,fileName)
-//       }
-// }
-
 export const downloadPdf = ({ data, pdfTitle, pdfName, columns }) => {
-  console.log("downloadPdf called");
-
-  let doc = new jsPDF("p", "mm", [430, 430]);
+  console.log("downloadPdf called", columns);
+  let doc;
+  if (columns.length <= 7) {
+    doc = new jsPDF();
+  } else {
+    doc = new jsPDF("p", "mm", [430, 430]);
+  }
 
   //create a pdf title
   doc.text(pdfTitle, 15, 10);
@@ -97,27 +74,28 @@ export const downloadPdf = ({ data, pdfTitle, pdfName, columns }) => {
     //           doc.addImage("https://images-na.ssl-images-amazon.com/images/M/MV5BMjA1MTc1NTg5NV5BMl5BanBnXkFtZTgwOTM2MDEzNzE@._V1_SX300.jpg", textPos.x,  textPos.y, dim, dim);
     //         }
     //       }
+
     theme: "grid",
-    columnStyles: {
-      0: { cellWidth: 10 },
-      1: { cellWidth: 25 },
-      2: { cellWidth: 20 },
-      3: { cellWidth: 25 },
-      4: { cellWidth: 25 },
-      5: { cellWidth: 30 },
-      6: { cellWidth: 25 },
-      7: { cellWidth: 25 },
-      8: { cellWidth: 25 }, //blood
-      9: { cellWidth: 25 },
-      10: { cellWidth: 25 }, //jobtype
-      11: { cellWidth: 22 },
-      12: { cellWidth: 20 }, //panno
-      13: { cellWidth: 22 },
-      14: { cellWidth: 20 },
-      15: { cellWidth: 20 },
-      16: { cellWidth: 30 },
-      17: { cellWidth: 20 },
-    },
+    // columnStyles: {
+    //   0: { cellWidth: 10 },
+    //   1: { cellWidth: 25 },
+    //   2: { cellWidth: 20 },
+    //   3: { cellWidth: 25 },
+    //   4: { cellWidth: 25 },
+    //   5: { cellWidth: 30 },
+    //   6: { cellWidth: 25 },
+    //   7: { cellWidth: 25 },
+    //   8: { cellWidth: 25 }, //blood
+    //   9: { cellWidth: 25 },
+    //   10: { cellWidth: 25 }, //jobtype
+    //   11: { cellWidth: 22 },
+    //   12: { cellWidth: 20 }, //panno
+    //   13: { cellWidth: 22 },
+    //   14: { cellWidth: 20 },
+    //   15: { cellWidth: 20 },
+    //   16: { cellWidth: 30 },
+    //   17: { cellWidth: 20 },
+    // },
     styles: {
       fontSize: 10,
       theme: "grid",
@@ -152,21 +130,31 @@ function addStyle(workbookBlob, dataInfo) {
         sheet.column(name).width(18);
       });
 
-      sheet.range(dataInfo.titleRange).merged(true).style({
-        bold: true,
-        horizontalAlignment: "center",
-        verticalAlignment: "center",
-      });
+      sheet
+        .range(dataInfo.titleRange)
+        .merged(true)
+        .style({
+          bold: true,
+          horizontalAlignment: "left",
+          verticalAlignment: "center",
+          fill: "dee0e6",
+          border: {
+            style: "bold",
+            color: "000000",
+          },
+        });
 
       sheet.range(dataInfo.theadRange).style({
         fill: "edd2cb",
         bold: false,
         horizontalAlignment: "center",
+        fontSize: 14,
       });
 
       sheet.range(dataInfo.tbodyRange).style({
         horizontalAlignment: "left",
         fill: "f1e8e6",
+        fontSize: 10,
       });
 
       sheet.range(dataInfo.tableRange).style({
@@ -203,7 +191,7 @@ function handleExport({ finalData, columnLength }) {
   const workbookBlob = new Blob([excelBuffer], { type: fileType });
   const dataInfo = {
     titleCell: "A2",
-    titleRange: `A1:B2`,
+    titleRange: `A1:${alphabetList[columnLength - 1]}2`,
 
     theadRange: `A3:${alphabetList[columnLength - 1]}3`, //table header from A3:S3
     tbodyRange: `A4:${alphabetList[columnLength - 1]}${finalData.length}`, //table body from A4:S[total item]
@@ -226,7 +214,7 @@ export const downloadExcelPopulate = ({ data, sheetName, fileName }) => {
   }
   table.push(tableHead);
 
-  const title = [{ A: "Details:" }, {}];
+  const title = [{ A: "Unique Cooperative Ltd." }, {}];
   const finalData = [...title, ...table];
 
   let obj = {};
@@ -251,4 +239,9 @@ export const downloadExcelPopulate = ({ data, sheetName, fileName }) => {
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
   });
+};
+
+export const tablePrint = () => {
+  console.log("table print called");
+  window.print();
 };

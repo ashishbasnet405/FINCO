@@ -10,6 +10,7 @@ import {
   CNavLink,
   CNavItem,
   CFormSelect,
+  CFormLabel,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilMenu } from "@coreui/icons";
@@ -47,7 +48,7 @@ const AppHeader = () => {
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
-        <CHeaderNav className="d-none d-md-flex">
+        <CHeaderNav className="">
           <CHeaderToggler
             className="ps-1"
             onClick={() => dispatch({ type: "set", sidebarShow: !sidebarShow })}
@@ -58,11 +59,11 @@ const AppHeader = () => {
           <CNavLink to="/dashboard" component={NavLink}>
             Dashboard
           </CNavLink>
-          <CNavItem></CNavItem>
         </CHeaderNav>
 
-        <CHeaderNav>
-          <CFormSelect size="md" onChange={handleDropDown}>
+        <CHeaderNav className="d-flex align-items-center my-sm-2">
+          <CFormLabel className="w-75 pt-2">Current Office:</CFormLabel>
+          <CFormSelect size="sm" onChange={handleDropDown}>
             {items.token &&
               items.detail.officeList.map((element) => {
                 const { id, name } = element;
@@ -79,6 +80,7 @@ const AppHeader = () => {
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>
+
       <CHeaderDivider />
       <CContainer fluid>
         <AppBreadcrumb />

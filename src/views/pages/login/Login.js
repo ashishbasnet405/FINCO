@@ -16,15 +16,23 @@ import {
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
 import { fincoLogin } from "src/axios/axiosinstance";
+import { useSelector, useDispatch } from "react-redux";
+import Modals from "src/globalfun/Modals";
 
 const Login = () => {
   const initialState = {
     userName: "",
     passWord: "",
   };
+
   const [details, setDetails] = useState(initialState);
   const [localStat] = useState(localStorage.getItem("fincoLoginDetails"));
+  let logErr;
+
   const navigate = useNavigate();
+  const modalState = useSelector((state) => state.modalVisible.status);
+  console.log("login modalstate", modalState);
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -39,10 +47,7 @@ const Login = () => {
         "/finco/api/staff/login?detail=true",
         details
       );
-      console.log(response);
       if (response.data.token) {
-        console.log("response", response);
-        console.log("login success");
         localStorage.setItem(
           "fincoLoginDetails",
           JSON.stringify(response.data)
@@ -51,7 +56,12 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (err) {
-      console.log(err.response.data.status + err.response.data.message); //status,error,message
+      dispatch({
+        type: "setModal",
+        status: !modalState,
+        statusCode: err.response.status,
+        message: err.response.data.message,
+      });
     }
   };
 
@@ -141,6 +151,7 @@ const Login = () => {
             </CCol>
           </CRow>
         </CContainer>
+        {modalState && <Modals modalType={false} />}
       </div>
     );
   }

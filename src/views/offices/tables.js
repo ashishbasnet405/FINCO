@@ -1,21 +1,28 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useRef } from "react";
 import MaterialTable from "@material-table/core";
+import ReactToPrint from "react-to-print";
 
 import { Icon } from "@iconify/react";
 
-import { fincoDefault } from "src/axios/axiosinstance";
-import { downloadExcelPopulate, downloadPdf } from "../../globalfun/globalfun";
+import {
+  downloadExcelPopulate,
+  downloadPdf,
+  tablePrint,
+} from "../../globalfun/globalfun";
 import { CContainer } from "@coreui/react";
 import { useSelector } from "react-redux";
 
 const Tables = ({ data }) => {
+  console.log("office data", data);
   const columns = [
-    { title: "ID", field: "id" },
-    { title: "Name", field: "name" },
-    { title: "Email", field: "email" },
-    { title: "Address", field: "address" },
-    { title: "Province", field: "province" },
-    { title: "PhoneNumber", field: "phoneNo" },
+    { title: "ID", field: "Id", width: "10%" },
+    { title: "Code", field: "Code" },
+    { title: "Name", field: "Name" },
+    { title: "EstdDate", field: "EstdDate" },
+    // { title: "Email", field: "email" },
+    // { title: "Address", field: "address" },
+    // { title: "Province", field: "province" },
+    { title: "PhoneNumber", field: "PhoneNo" },
   ];
 
   const excelData = {
@@ -25,69 +32,75 @@ const Tables = ({ data }) => {
   };
   const pdfData = {
     data: data,
-    pdfTitle: "Office Details:",
+    pdfTitle: "Unique Cooperative Ltd.",
     pdfName: "OfficeList.pdf",
     columns: columns,
   };
 
+  const officeName = useSelector((state) => state.dropDownData.selected.name);
+  const title = `Office Name:${officeName}`;
+
   return (
     <>
-      <CContainer className="p-2">
-        <MaterialTable
-          title="Office Details"
-          data={data}
-          columns={columns}
-          options={{
-            headerStyle: {
-              background: "rgb(84,142,239)",
-              color: "white",
-              fontWeight: "bold",
-              position: "sticky",
-              top: 0,
+      {/* <CContainer className=""> */}
+      <MaterialTable
+        title={title}
+        data={data}
+        columns={columns}
+        options={{
+          headerStyle: {
+            background: "rgb(84,142,239)",
+            color: "white",
+            fontWeight: "bold",
+            position: "sticky",
+            top: 0,
+          },
+          maxBodyHeight: "650px",
+          sorting: true,
+          columnsButton: true,
+          // searchFieldVariant:"outlined",
+          // searchFieldAlignment: "left",
+          paginationType: "stepped",
+          showFirstLastPageButtons: false,
+          // toolbarButtonAlignment: "left",
+          // showTitle: false,
+        }}
+        actions={[
+          {
+            icon: () => (
+              <Icon
+                icon="mdi:file-excel"
+                width="20"
+                inline={true}
+                id={1}
+                color={"green"}
+              />
+            ),
+            tooltip: "Export To Excel",
+            isFreeAction: true,
+            onClick: (event) => {
+              downloadExcelPopulate(excelData);
             },
-            maxBodyHeight: "650px",
-            sorting: true,
-            columnsButton: true,
-            // searchFieldVariant:"outlined",
-            paginationType: "stepped",
-            showFirstLastPageButtons: false,
-          }}
-          actions={[
-            {
-              icon: () => (
-                <Icon
-                  icon="mdi:file-excel"
-                  width="25"
-                  inline={true}
-                  id={1}
-                  color={"green"}
-                />
-              ),
-              tooltip: "Export To Excel",
-              isFreeAction: true,
-              onClick: (event) => {
-                downloadExcelPopulate(excelData);
-              },
+          },
+          {
+            icon: () => (
+              <Icon
+                icon="mdi:file-pdf-box"
+                color={"red"}
+                width="20"
+                id={1}
+                inline={true}
+              />
+            ),
+            tooltip: "Download as pdf",
+            isFreeAction: true,
+            onClick: (event) => {
+              downloadPdf(pdfData);
             },
-            {
-              icon: () => (
-                <Icon
-                  icon="mdi:file-pdf-box"
-                  color={"red"}
-                  width="26"
-                  id={1}
-                  inline={true}
-                />
-              ),
-              tooltip: "Download as pdf",
-              isFreeAction: true,
-              onClick: (event) => {
-                downloadPdf(pdfData);
-              },
-            },
-          ]}
-        />
-      </CContainer>
+          },
+        ]}
+      />
+      {/* </CContainer> */}
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { fincoDefault } from "src/axios/axiosinstance";
 import { downloadPdf, downloadExcelPopulate } from "../../globalfun/globalfun";
 import { useSelector } from "react-redux";
-import { CContainer } from "@coreui/react";
+import { CContainer, CFormLabel } from "@coreui/react";
 const Tables = ({ data }) => {
   const columns = [
     { title: "Id", field: "StaffId" },
@@ -68,7 +68,7 @@ const Tables = ({ data }) => {
               icon: () => (
                 <Icon
                   icon="mdi:file-excel"
-                  width="25"
+                  width="20"
                   inline={true}
                   id={1}
                   color={"green"}
@@ -86,7 +86,7 @@ const Tables = ({ data }) => {
                 <Icon
                   icon="mdi:file-pdf-box"
                   color={"red"}
-                  width="26"
+                  width="20"
                   id={1}
                   inline={true}
                 />
