@@ -63,7 +63,7 @@ const routes = [
   { path: "/details", name: "Details", element: Offices, exact: true },
   { path: "/details/offices", name: "Office", element: Offices },
   { path: "/details/staff", name: "Staff", element: Staff },
-  { path: "/details/centers", name: "Centers", element: Center },
+  // { path: "/details/centers", name: "Centers", element: Center },
   { path: "/details/members", name: "Members", element: Member },
 ];
 

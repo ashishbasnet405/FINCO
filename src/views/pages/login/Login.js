@@ -27,11 +27,9 @@ const Login = () => {
 
   const [details, setDetails] = useState(initialState);
   const [localStat] = useState(localStorage.getItem("fincoLoginDetails"));
-  let logErr;
 
   const navigate = useNavigate();
   const modalState = useSelector((state) => state.modalVisible.status);
-  console.log("login modalstate", modalState);
   const dispatch = useDispatch();
 
   const handleInput = (e) => {
@@ -42,13 +40,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handle submit");
     try {
       const response = await fincoLogin.post(
         "/finco/api/staff/login?detail=true",
         details
       );
-      console.log("login response", response);
       if (response.data.token) {
         localStorage.setItem(
           "fincoLoginDetails",
@@ -62,7 +58,7 @@ const Login = () => {
         type: "setModal",
         status: !modalState,
         statusCode: err.response.status,
-        message: err.response.data,
+        message: err.response.data.message,
       });
     }
   };
