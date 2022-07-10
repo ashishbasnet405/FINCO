@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   AppContent,
   AppSidebar,
@@ -7,11 +7,6 @@ import {
 } from "../components/index";
 
 const DefaultLayout = () => {
-  // useEffect(() => {
-  //   console.log("inside")
-  // }, [])
-  // console.log("after")
-
   return (
     <div>
       <AppSidebar />

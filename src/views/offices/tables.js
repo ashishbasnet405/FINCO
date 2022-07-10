@@ -1,19 +1,12 @@
-import React, { useRef } from "react";
+import React from "react";
 import MaterialTable from "@material-table/core";
-import ReactToPrint from "react-to-print";
 
 import { Icon } from "@iconify/react";
 
-import {
-  downloadExcelPopulate,
-  downloadPdf,
-  tablePrint,
-} from "../../globalfun/globalfun";
-import { CContainer } from "@coreui/react";
+import { downloadExcelPopulate, downloadPdf } from "../../globalfun/globalfun";
 import { useSelector } from "react-redux";
 
 const Tables = ({ data }) => {
-  console.log("office data", data);
   const columns = [
     { title: "ID", field: "Id", width: "10%" },
     { title: "Code", field: "Code" },
