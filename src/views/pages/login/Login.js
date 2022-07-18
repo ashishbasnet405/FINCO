@@ -54,14 +54,12 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (err) {
-      err.response.data
-        ? dispatch({
-            type: "setModal",
-            status: !modalState,
-            statusCode: err.response.status,
-            message: err.response.data.message,
-          })
-        : alert(err);
+      dispatch({
+        type: "setModal",
+        status: !modalState,
+        statusCode: err.response.status,
+        message: err.response.data.message,
+      });
     }
   };
 
@@ -133,12 +131,12 @@ const Login = () => {
                 >
                   <CCardBody className="text-center">
                     <div>
-                      <h2>FINCO 360</h2>
-                      {/* <p>
+                      {/* <h2>Sign up</h2> */}
+                      <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit, sed do eiusmod tempor incididunt ut labore et
                         dolore magna aliqua.
-                      </p> */}
+                      </p>
                       {/* <Link to="/register">
                           <CButton color="primary" className="mt-3" active tabIndex={-1}>
                             Register Now!

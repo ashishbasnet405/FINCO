@@ -40,6 +40,7 @@ const AppHeader = () => {
   }, [selected]);
 
   const handleDropDown = (e) => {
+    // console.log(e.target.selectedOptions[0].label)  //return the txt of selected option
     const id = e.target.value.split("!!")[0];
     const name = e.target.value.split("!!")[1];
     setSelected({ ...selected, id, name });

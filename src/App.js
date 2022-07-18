@@ -2,9 +2,6 @@ import React, { Component, Suspense } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 import Protected from "./Protected";
-import JobHistory from "./views/staff/cardnav/JobHistory";
-import Staff from "./views/staff/Staff";
-import General from "./views/staff/cardnav/General";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -27,6 +24,7 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Routes>
+            {/* <Route path="/login" name="Login Page" element={<Login />} /> */}
             <Route exact path="/" name="Login Page" element={<Login />} />
             <Route
               exact
@@ -36,10 +34,11 @@ class App extends Component {
             />
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
-
+            {/* <Route path="*" name="Home" element={<DefaultLayout />} /> */}
             <Route element={<Protected />}>
               <Route path="*" name="Home" element={<DefaultLayout />} />
             </Route>
+            <Route path="*" name="Page Not Found" element={<Page404 />} />
           </Routes>
         </Suspense>
       </HashRouter>

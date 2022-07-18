@@ -1,5 +1,5 @@
-import React from "react";
-import { CFooter } from "@coreui/react";
+import React from 'react'
+import { CFooter } from '@coreui/react'
 
 const AppFooter = () => {
   return (
@@ -16,11 +16,8 @@ const AppFooter = () => {
           CoreUI React Admin &amp; Dashboard Template
         </a>
       </div> */}
-      <div className="d-flex justify-content-center">
-        <h3 className="text-center">Unique Cooperative Ltd.-2078/2079</h3>
-      </div>
     </CFooter>
-  );
-};
+  )
+}
 
-export default React.memo(AppFooter);
+export default React.memo(AppFooter)

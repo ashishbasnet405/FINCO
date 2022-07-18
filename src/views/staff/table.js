@@ -1,14 +1,10 @@
-import React, { useState, useEffect, createContext } from "react";
-import MaterialTable, { MTableBodyRow } from "@material-table/core";
+import React, { useState, useEffect, useCallback } from "react";
+import MaterialTable from "@material-table/core";
 import { Icon } from "@iconify/react";
 import { fincoDefault } from "src/axios/axiosinstance";
 import { downloadPdf, downloadExcelPopulate } from "../../globalfun/globalfun";
 import { useSelector } from "react-redux";
 import { CContainer, CFormLabel } from "@coreui/react";
-import AddModals from "src/globalfun/AddModals";
-import CardNav from "./cardnav/CardNav";
-import { getToken } from "../../globalfun/globalfun";
-export const ModalNavContext = createContext();
 const Tables = ({ data }) => {
   const columns = [
     { title: "Id", field: "StaffId" },
@@ -45,36 +41,6 @@ const Tables = ({ data }) => {
   const officeName = useSelector((state) => state.dropDownData.selected.name);
   const title = `Office Name:${officeName}`;
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [rowData, setRowData] = useState("");
-  const [staffProfile, setStaffProfile] = useState([]);
-  const token = getToken();
-
-  const makereq = async (id) => {
-    try {
-      const response = await fincoDefault.get(
-        `/finco/api/auth/staff/profile?staffId=${id}`,
-        {
-          headers: {
-            token: `${token}`,
-          },
-        }
-      );
-      console.log("response", response);
-      setStaffProfile(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleClick = (event, rowData) => {
-    setRowData(rowData);
-    makereq(rowData.StaffId);
-    handleShow();
-    // alert(`event.target.tagName = '${rowData}'`);
-  };
   return (
     <>
       <CContainer className="p-2">
@@ -83,7 +49,6 @@ const Tables = ({ data }) => {
           data={data}
           columns={columns}
           options={{
-            // selection: true,
             headerStyle: {
               background: "rgb(84,142,239)",
               color: "white",
@@ -133,34 +98,8 @@ const Tables = ({ data }) => {
               },
             },
           ]}
-          // components={{
-          //   Row: (props) => {
-          //     return (
-          //       <MTableBodyRow
-          //         {...props}
-          //         persistEvents
-          //         onRowClick={handleClick}
-          //       />
-          //     );
-          //   },
-          // }}
-          onRowClick={handleClick}
         />
       </CContainer>
-      {show && (
-        <ModalNavContext.Provider
-          value={{ rowData, staffProfile, handleClose, handleShow }}
-        >
-          <AddModals
-            title="General"
-            show={show}
-            handleClose={handleClose}
-            footers={false}
-          >
-            <CardNav />
-          </AddModals>
-        </ModalNavContext.Provider>
-      )}
     </>
   );
 };

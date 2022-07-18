@@ -17,8 +17,3 @@ export const fincoDefault = axios.create({
     "X-TenantID": "finco3",
   },
 });
-
-export const fincoMemberEndpoints = [
-  "finco/api/auth/member/status/list",
-  "finco/api/auth/member/category/list",
-];
