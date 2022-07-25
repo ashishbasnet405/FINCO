@@ -8,6 +8,10 @@ const initialState = {
     message: "",
   },
   jobStatus: {},
+  mainModalVisible: {
+    shows: false,
+    modalName: "",
+  },
 };
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -25,7 +29,10 @@ const changeState = (state = initialState, { type, ...rest }) => {
     case "getJobStatus": {
       return { ...state, jobStatus: rest };
     }
-
+    case "setJobStatus": {
+      console.log("setjob", rest);
+      return { ...state, ...rest };
+    }
     default:
       return state;
   }

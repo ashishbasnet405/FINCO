@@ -1,16 +1,14 @@
 import React, { useRef } from "react";
-import MaterialTable from "@material-table/core";
+import MaterialTable, { MTableToolbar } from "@material-table/core";
 import ReactToPrint from "react-to-print";
-
+import Toolbar from "@material-ui/core";
 import { Icon } from "@iconify/react";
-
-import {
-  downloadExcelPopulate,
-  downloadPdf,
-  tablePrint,
-} from "../../globalfun/globalfun";
+import { AddCircleOutlineRounded } from "@material-ui/icons";
+import { downloadExcelPopulate, downloadPdf } from "../../globalfun/globalfun";
 import { CContainer } from "@coreui/react";
 import { useSelector } from "react-redux";
+import { Grid } from "@material-ui/core";
+import "./customstyle.css";
 
 const Tables = ({ data }) => {
   console.log("office data", data);
@@ -19,9 +17,6 @@ const Tables = ({ data }) => {
     { title: "Code", field: "Code" },
     { title: "Name", field: "Name" },
     { title: "EstdDate", field: "EstdDate" },
-    // { title: "Email", field: "email" },
-    // { title: "Address", field: "address" },
-    // { title: "Province", field: "province" },
     { title: "PhoneNumber", field: "PhoneNo" },
   ];
 
@@ -55,15 +50,19 @@ const Tables = ({ data }) => {
             position: "sticky",
             top: 0,
           },
-          maxBodyHeight: "650px",
+          rowStyle: {
+            height: "40px",
+          },
+          padding: "dense",
           sorting: true,
           columnsButton: true,
-          // searchFieldVariant:"outlined",
+          // searchFieldVariant: "outlined",
           // searchFieldAlignment: "left",
           paginationType: "stepped",
           showFirstLastPageButtons: false,
           // toolbarButtonAlignment: "left",
-          // showTitle: false,
+          showTitle: true,
+          maxBodyHeight: 250,
         }}
         actions={[
           {

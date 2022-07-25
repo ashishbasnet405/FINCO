@@ -130,13 +130,9 @@ const Login = () => {
                   style={{ width: "44%" }}
                 >
                   <CCardBody className="text-center">
-                    <div>
+                    <div className="d-flex justify-content-center align-items-center">
                       {/* <h2>Sign up</h2> */}
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua.
-                      </p>
+                      <h3>FINCO 360</h3>
                       {/* <Link to="/register">
                           <CButton color="primary" className="mt-3" active tabIndex={-1}>
                             Register Now!

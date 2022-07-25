@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@370&display=swap');
+
+.entryform{
+    height:25px !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    padding:1px !important;
+    font-size: 10px !important;
+}
+
+.entryformlabel{
+    font-size:12px !important;
+    padding-right:2px !important;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+select.entryform{
+    background-size: 22px 10px !important;
+    height:25px !important;
+}
+
+html:not([dir=rtl]) select.entryform{
+    background-position:right 0.1rem center !important;
+}
+
+.stafflabel{
+    font-size: "15px";
+    font-weight: bold;
+    color: white;
+    font-family: 'Mukta', sans-serif;
+}

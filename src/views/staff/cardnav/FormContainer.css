@@ -1,0 +1,8 @@
+@media only screen and (min-width:993px) and (max-width:1200px){
+        .firstcont{
+            width:55% !important;
+        }
+        .secondcont{
+            width:45% !important;
+        }
+}

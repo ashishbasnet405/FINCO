@@ -1,6 +1,6 @@
 // <title>coreui react pro logo</title>
 export const logoNegative = [
-  '608 134',
+  "608 134",
   `
   <title>Finco</title>
   <g>
@@ -31,4 +31,4 @@ export const logoNegative = [
     </g>
   </g>
 `,
-]
+];

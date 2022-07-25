@@ -15,8 +15,15 @@ import Table from "./table";
 import { useSelector, useDispatch } from "react-redux";
 import CIcon from "@coreui/icons-react";
 import { cilUser } from "@coreui/icons";
+import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
+import MainModals from "src/globalfun/MainModals";
+import AddStaff from "./AddStaff";
+import StaffEntry from "./StaffEntry";
+import "../offices/customstyle.css";
 
 const Staff = () => {
+  const navigate = useNavigate();
   const [data, setDatas] = useState([]);
   const [jobStatus, setJobStatus] = useState([]);
   const [selected, setSelected] = useState({
@@ -28,6 +35,7 @@ const Staff = () => {
   const statusId = useSelector(
     (state) => state.jobStatus.selected?.JobStatusID
   );
+
   const token = getToken();
   const handleDropDown = (e) => {
     const JobStatusID = e.target.value.split("!!")[0];
@@ -42,12 +50,21 @@ const Staff = () => {
           headers: { token: `${token}` },
         });
         setJobStatus(response.data);
+        dispatch({
+          type: "setJobStatus",
+          selected: {
+            JobStatusID: response.data[0].JobStatusID,
+            Description: response.data[0].Description,
+          },
+        });
         setSelected({
           JobStatusID: response.data[0].JobStatusID,
           Description: response.data[0].Description,
         });
       } catch (err) {
-        alert(err.response.data.message);
+        console.log(err);
+        alert(err);
+        navigate("/dashboard");
       }
     };
     getJobDetails();
@@ -58,24 +75,25 @@ const Staff = () => {
   }, [selected]);
 
   useEffect(() => {
-    const getStaff = async () => {
-      try {
-        const response = await fincoDefault.get(
-          `/finco/api/auth/staff/list?officeId=${staffId}&statusId=${
-            statusId ? statusId : 1
-          }`,
-          {
-            headers: {
-              token: `${token}`,
-            },
-          }
-        );
-        setDatas(response.data);
-      } catch (err) {
-        alert(err);
-      }
-    };
-    getStaff();
+    if (statusId) {
+      const getStaff = async () => {
+        try {
+          const response = await fincoDefault.get(
+            `/finco/api/auth/staff/list?officeId=${staffId}&statusId=${statusId}`,
+            {
+              headers: {
+                token: `${token}`,
+              },
+            }
+          );
+          setDatas(response.data);
+        } catch (err) {
+          alert(err);
+          navigate("/dashboard");
+        }
+      };
+      getStaff();
+    }
   }, [staffId, statusId]);
 
   return (
@@ -89,44 +107,51 @@ const Staff = () => {
                   icon={cilUser}
                   customClassName="nav-icon"
                   height={30}
-                  width={50}
-                  style={{ color: "white" }}
+                  width={40}
+                  className="text-white"
                 />
                 <span className="d-inline-block text-white">Staff Details</span>
               </CCardHeader>
-              <CCardBody>
-                <div
-                  className="m-1 p-2 d-flex justify-content-center"
-                  style={{
-                    borderRadius: "5px",
-                    background: "#1a3eb4",
-                    color: "white",
-                  }}
-                >
-                  <CFormLabel
-                    className="form-label pt-2 px-2 "
-                    style={{ fontSize: "1rem", fontWeight: "bold" }}
+              <CCardBody className="p-0 p-lg-1">
+                <div className="container staff-card-form pt-0">
+                  <div
+                    className="row"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #4b6cb7 0%, #182848 100%)",
+                    }}
                   >
-                    Job status:
-                  </CFormLabel>
-
-                  <CFormSelect
-                    size="sm"
-                    onChange={handleDropDown}
-                    className="w-25"
-                  >
-                    {jobStatus.map((element) => {
-                      const { JobStatusID, Description } = element;
-                      return (
-                        <option
-                          value={`${JobStatusID}!!${Description}`}
-                          key={JobStatusID}
-                        >
-                          {Description}
-                        </option>
-                      );
-                    })}
-                  </CFormSelect>
+                    <div className="col-lg-5 col-md-6 col-sm-9 mx-auto p-1 ">
+                      <div className="container">
+                        <div className="row align-items-center">
+                          <label
+                            htmlFor="jobstatus"
+                            className="col-form-label col-xl-4 col-lg-5 stafflabel"
+                          >
+                            Job Status :
+                          </label>
+                          <div className="px-0 col-xl-6 col-lg-7">
+                            <select
+                              className="form-select form-select-sm"
+                              onChange={handleDropDown}
+                            >
+                              {jobStatus.map((element) => {
+                                const { JobStatusID, Description } = element;
+                                return (
+                                  <option
+                                    value={`${JobStatusID}!!${Description}`}
+                                    key={JobStatusID}
+                                  >
+                                    {Description}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <Table data={data} jobs={jobStatus} />
               </CCardBody>
