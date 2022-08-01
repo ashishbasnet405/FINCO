@@ -1,0 +1,54 @@
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    color: #ffffff !important;
+    background-color: #0e7cfb !important;
+    /* border-color: var(--cui-nav-tabs-link-active-border-color, #c4c9d0 #c4c9d0 #fff); */
+}
+.modal-body .editmodalnav{
+    border:0.5px solid lightgray !important;
+}
+.general-image{
+    height:150px;
+    width:200px;
+}
+.general-legend{
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.general-content ul li{
+    background: transparent !important;
+    padding: 1px !important;
+    border:0;
+    font-size: 15px;
+}
+@media only screen and (max-width:430px){
+    .general-image{
+        height:120px;
+        width:150px;
+    }
+    .uploadbtn button{
+        font-size:0.9rem;
+    }
+}
+@media only screen and  (min-width:993px) and (max-width:2000px){
+    .edit-icon{
+        position: absolute;
+        right:-75px;
+        top:-5px;
+    }
+    .img-container{
+        padding-left:0 !important;
+        padding-right:0 !important;
+    }
+}
+
+@media only screen and (min-width:400px){
+    .img-container{
+        padding: 0 !important;
+    }
+   
+}
+@media only screen and (min-width:430px){
+    .imageuploadbtn{
+        font-size: 14px;
+    }
+}

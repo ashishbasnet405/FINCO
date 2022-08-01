@@ -1,0 +1,37 @@
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+  }
+.btn-circle i{
+    position: relative;
+    top: 2px;
+    font-size:20px;
+}
+.btn-circle-lg {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 1.1rem;
+  }
+.staff-card-form{
+    border-radius: 6px;
+}
+input.form-control, select {
+ }
+@media only screen and (max-width:500px){
+   
+    .MuiPaper-elevation2 .MuiToolbar-root{
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: #FFFFFF !important;
+    }
+    .MuiPaper-elevation2 .MuiToolbar-root:first-child{
+        padding:10px;
+        font-size:10px;
+    }
+
+}
