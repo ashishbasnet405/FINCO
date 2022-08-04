@@ -52,7 +52,7 @@ const inpType = ({
           value={values}
           disabled={disable}
         >
-          {id === "zoneId" && <option selected={true}>Select any One</option>}
+          {id === "zoneId" && <option value="">Select any One</option>}
           {selectOptionText.length &&
             selectOptionText.map((element, index) => {
               const { id, name } = element;

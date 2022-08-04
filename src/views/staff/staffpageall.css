@@ -3,12 +3,18 @@
     background-color: #0e7cfb !important;
     /* border-color: var(--cui-nav-tabs-link-active-border-color, #c4c9d0 #c4c9d0 #fff); */
 }
+.image-container{
+    padding:0;
+}
+.nav-tabs{
+    margin-bottom: 1px !important;
+}
 .modal-body .editmodalnav{
     border:0.5px solid lightgray !important;
 }
 .general-image{
-    height:150px;
-    width:200px;
+    height:120px;
+    width:150px;
 }
 .general-legend{
     font-size: 18px;
@@ -20,25 +26,28 @@
     border:0;
     font-size: 15px;
 }
-@media only screen and (max-width:430px){
-    .general-image{
-        height:120px;
-        width:150px;
-    }
-    .uploadbtn button{
-        font-size:0.9rem;
-    }
+.profile-card-body{
+    padding:8px !important;
+    margin-bottom: 10px;
 }
-@media only screen and  (min-width:993px) and (max-width:2000px){
-    .edit-icon{
-        position: absolute;
-        right:-75px;
-        top:-5px;
-    }
-    .img-container{
-        padding-left:0 !important;
-        padding-right:0 !important;
-    }
+.general-info-ul li{
+    padding:1px 0 !important;
+}
+.profile-photo,.sign-photo{
+    overflow: hidden;
+}
+img.general-image{
+    transition:all .5s ease-in-out;
+}
+img.general-image:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+fieldset,legend{
+    margin-bottom: 2px !important;
+}
+
+@media only screen and (min-width:992px) and (max-width:1200px){
 }
 
 @media only screen and (min-width:400px){
@@ -47,8 +56,22 @@
     }
    
 }
-@media only screen and (min-width:430px){
-    .imageuploadbtn{
-        font-size: 14px;
+@media only screen and (min-width:430px) and (max-width:515px){
+    .general-image{
+        height:100px;
+        width:100px;
     }
+    .imageuploadbtn{
+        font-size: 10px;
+    }
+}
+@media only screen and (max-width:429px){
+    .general-image{
+        height:100px;
+        width:100px;
+    }
+    .uploadbtn button{
+        font-size:10px;
+    }
+  
 }

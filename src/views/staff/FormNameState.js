@@ -29,10 +29,10 @@ export const formState = {
 
   joinDate: "",
   grade: "",
-  JobStatusID: "", //jobstatus
+  statusId: "", //jobstatus
   positionId: "", //position
-  jobTypeId: "",
   officeId: "",
   departmentId: "",
+  jobTypeId: "",
   groupId: "",
 };

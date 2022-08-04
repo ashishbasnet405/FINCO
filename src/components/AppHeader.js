@@ -46,7 +46,7 @@ const AppHeader = () => {
     setSelected({ ...selected, id, name });
   };
   return (
-    <CHeader position="sticky" className="mb-4">
+    <CHeader position="sticky" className="mb-2">
       <CContainer fluid>
         <CHeaderNav className="">
           <CHeaderToggler

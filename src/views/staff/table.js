@@ -12,9 +12,11 @@ import CardNav from "./cardnav/CardNav";
 import "../offices/customstyle.css";
 import StaffEntry from "./StaffEntry";
 import AddStaff from "./AddStaff";
+import { useNavigate } from "react-router-dom";
 
 export const StaffTable = createContext();
 const Tables = ({ data }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = getToken();
   const [shows, setShow] = useState(false);
@@ -26,25 +28,6 @@ const Tables = ({ data }) => {
   const handleEntryModalShow = () => setStaffEntry(true);
   const handleEntryModalClose = () => setStaffEntry(false);
 
-  const makereq = async (id) => {
-    try {
-      const response = await fincoDefault.get(
-        `/finco/api/auth/staff/profile?staffId=${id}`,
-        {
-          headers: {
-            token: `${token}`,
-          },
-        }
-      );
-      setStaffProfile(response.data);
-      dispatch({
-        type: "mainModal",
-        shows: true,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
   const columns = [
     { title: "Id", field: "StaffId" },
     { title: "FirstName", field: "Firstname" },
@@ -88,9 +71,7 @@ const Tables = ({ data }) => {
   const title = `Office Name:${officeName}`;
 
   const handleClick = (event, rowData) => {
-    console.log("handleShow row click", rowData);
-    makereq(rowData.StaffId);
-    handleShow();
+    navigate(`/staff/profile`, { state: { data: rowData } });
   };
   const TableCellStyle = { border: "1px solid #e5e5e5" };
   return (

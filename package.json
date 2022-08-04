@@ -2,7 +2,6 @@
   "name": "@coreui/coreui-free-react-admin-template",
   "version": "4.3.1",
   "description": "CoreUI Free React Admin Template",
-  "homepage": "https://github.com/ashishbasnet405/FINCO.git",
   "bugs": {
     "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
   },
@@ -55,6 +54,7 @@
     "react-to-print": "^2.14.7",
     "redux": "4.2.0",
     "simplebar-react": "^2.3.7",
+    "use-react-router-breadcrumbs": "^3.2.1",
     "xlsx": "^0.18.5",
     "xlsx-populate": "^1.21.0"
   },

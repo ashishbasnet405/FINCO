@@ -53,18 +53,21 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
 const Offices = React.lazy(() => import("./views/offices/Office"));
 const Staff = React.lazy(() => import("./views/staff/Staff"));
+const StaffId = React.lazy(() => import("./views/staff/staffid"));
 const Center = React.lazy(() => import("./views/centers/Center"));
 const Member = React.lazy(() => import("./views/members/Member"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", element: Dashboard },
-
-  { path: "/details", name: "Details", element: Offices, exact: true },
-  { path: "/details/offices", name: "Office", element: Offices },
-  { path: "/details/staff", name: "Staff", element: Staff },
-  // { path: "/details/centers", name: "Centers", element: Center },
-  { path: "/details/members", name: "Members", element: Member },
+  { path: "/offices", name: "Office", element: Offices },
+  { path: "/staff", name: "Staff", element: Staff },
+  {
+    path: "/staff/profile",
+    name: "Profile",
+    element: StaffId,
+  },
+  { path: "/members", name: "Members", element: Member },
 ];
 
 export default routes;

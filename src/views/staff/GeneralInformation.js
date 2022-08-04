@@ -10,7 +10,6 @@ import {
   extractDate,
 } from "src/globalfun/ExtractInput";
 const GeneralInformation = () => {
-  console.log("general info");
   const {
     inpValue: initialState,
     reference,
@@ -27,7 +26,6 @@ const GeneralInformation = () => {
   if (tempstaffForm.form) {
     inpValue = { ...initialState, ...tempstaffForm.form };
   }
-  // console.log("last inpvalue", inpValue);
 
   return (
     <fieldset className="border p-1">
@@ -195,13 +193,13 @@ const GeneralInformation = () => {
               <InputBox
                 handleChange={handleChange}
                 label="Ctzn district:"
-                id="cdistrict"
+                id="cdistrictId"
                 inptypes="selectwithid"
                 rowTypes="double"
                 labelclassname="col-12 col-md-6 col-lg-6 "
                 inpclassname="col-12 col-md-6 col-lg-6 "
                 selectOptionText={districtsList}
-                values={inpValue.cdistrict}
+                values={inpValue.cdistrictId}
               />
             </div>
           </div>

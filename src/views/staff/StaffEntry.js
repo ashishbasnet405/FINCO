@@ -7,15 +7,37 @@ import BankDetails from "./BankDetails";
 import GeneralInformation from "./GeneralInformation";
 import JobDetails from "./JobDetails";
 import { formState } from "./FormNameState";
-import { Modal, ModalFooter } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 export const StaffEntryContext = createContext();
 
 const StaffEntry = ({ staffProfile = "", modalFooter, handleClose }) => {
-  console.log("staffProfile", staffProfile);
   const [reference, setReference] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = getToken();
+    const makeRequest = async () => {
+      try {
+        const response = await fincoDefault.get(
+          "/finco/api/auth/detail/reference",
+          {
+            headers: {
+              token: `${token}`,
+            },
+          }
+        );
+        setReference(response.data);
+      } catch (err) {
+        console.log("error", err);
+        alert(err);
+      }
+    };
+    makeRequest();
+  }, []);
   const [staffForm, setStaffForm] = useState([]);
   const [tempstaffForm, settempStaffForm] = useState([]);
+  const [updateSubmit, setupdateSubmit] = useState([]);
   const officeId = useSelector((state) => state.dropDownData.selected.id);
 
   const formKeyName = { ...formState };
@@ -41,40 +63,60 @@ const StaffEntry = ({ staffProfile = "", modalFooter, handleClose }) => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    console.log("name", name, "-----value=", value);
 
     if (tempstaffForm.form) {
       settempStaffForm({ ...tempstaffForm.form, [name]: value });
       setInpvalue({ ...tempstaffForm.form, [name]: value });
+      setupdateSubmit({ ...updateSubmit, [name]: value });
+      // setInpvalue({ ...tempstaffForm.form });
     } else {
       setInpvalue({ ...inpValue, [name]: value });
+    }
+  };
+
+  const staffSave = async () => {
+    const token = getToken();
+    try {
+      const response = await fincoDefault.post(
+        `/finco/api/auth/staff/save`,
+        inpValue,
+        {
+          headers: {
+            token: `${token}`,
+          },
+        }
+      );
+      alert(response.data?.message);
+      console.log(response);
+      if (response.status === 200) {
+        const rowData = {
+          StaffId: inpValue.staffId,
+        };
+        navigate("/staff/profile", { state: { data: rowData } });
+      }
+    } catch (err) {
+      alert("staff save error", err);
+      console.log(err);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit", inpValue);
-  };
-
-  useEffect(() => {
-    const token = getToken();
-    const makeRequest = async () => {
-      try {
-        const response = await fincoDefault.get(
-          "/finco/api/auth/detail/reference",
-          {
-            headers: {
-              token: `${token}`,
-            },
-          }
-        );
-        setReference(response.data);
-      } catch (err) {
-        console.log("error", err);
-        alert(err);
+    if (staffForm.form) {
+      if (!tempstaffForm.form) {
+        console.log("inp value to submit inpvalue=", inpValue);
+        staffSave(inpValue);
+      } else {
+        console.log("inp value to submit tempstaffform=", tempstaffForm.form);
+        staffSave(tempstaffForm.form);
       }
-    };
-    makeRequest();
-  }, []);
+    } else {
+      staffSave(inpValue);
+    }
+    handleClose();
+  };
 
   useEffect(() => {
     if (staffProfile) {
@@ -91,6 +133,8 @@ const StaffEntry = ({ staffProfile = "", modalFooter, handleClose }) => {
           );
           setStaffForm(response.data);
           settempStaffForm(response.data);
+          // setInpvalue(response.data.form);
+          setupdateSubmit(response.data.form);
         } catch (error) {
           console.log(error.response);
         }
@@ -98,10 +142,9 @@ const StaffEntry = ({ staffProfile = "", modalFooter, handleClose }) => {
       getStaffForm();
     }
   }, []);
-
   return (
     <>
-      {reference && tempstaffForm && (
+      {tempstaffForm && (
         <StaffEntryContext.Provider
           value={{
             reference,

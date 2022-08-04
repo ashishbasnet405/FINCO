@@ -13,7 +13,16 @@ export const extractMaritialStatus = (list) => {
     return res;
   }
 };
-
+export const extractDepartmentList = (list) => {
+  if (list) {
+    const item = list.map((element) => {
+      const { departmentId: id, departmentName: name } = element;
+      return { id, name };
+    });
+    return item;
+  }
+  return " ";
+};
 export const extractGender = (list) => {
   if (list) {
     const arr = list.map((element) => {
@@ -66,7 +75,7 @@ export const extractAccountTypeList = (list) => {
 export const extractJobStatus = (list) => {
   if (list) {
     const item = list.map((element) => {
-      const { JobStatusID: id, Description: name } = element;
+      const { jobStatusId: id, description: name } = element;
       return { id, name };
     });
     return item;

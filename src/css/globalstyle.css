@@ -1,0 +1,9 @@
+.breadcumbActiveStyle{
+    color:#8a93a2;
+    text-decoration: none;
+    pointer-events: none;
+}
+.breadcumbActiveStyle:hover{
+    cursor: text;
+    color:#8a93a2;
+}

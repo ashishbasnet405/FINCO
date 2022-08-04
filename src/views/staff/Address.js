@@ -15,7 +15,6 @@ const Address = () => {
   const {
     inpValue: initialState,
     reference,
-    staffForm,
     handleChange,
   } = useContext(StaffEntryContext);
   let { inpValue, tempstaffForm } = useContext(StaffEntryContext);
@@ -81,8 +80,6 @@ const Address = () => {
     }
   }, [inpValue.zoneId]);
 
-  console.log("District List", districtList);
-  console.log("Vdc List", vdcList);
   return (
     <fieldset className="border p-1">
       <legend className="float-none w-auto mb-0">Address</legend>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { InputBox } from "./ReusableForm";
+import { accountTypeList } from "../../globalfun/AccountTypeList";
 import {
   extractAccountTypeList,
   extractOfficeList,
@@ -11,22 +12,17 @@ const BankDetails = () => {
     officeList: officedata,
     inpValue: initialState,
     handleChange,
+    reference,
   } = useContext(StaffEntryContext);
   let { inpValue, tempstaffForm } = useContext(StaffEntryContext);
 
   const officeList = extractOfficeList(officedata);
-  let accountTypeList = "";
-  // console.log("staffForm", staffForm);
-  if (staffForm.accountTypeList) {
-    accountTypeList = extractAccountTypeList(staffForm.accountTypeList);
-  }
   if (tempstaffForm.form) {
     inpValue = {
       ...initialState,
       ...tempstaffForm.form,
     };
   }
-  console.log("account", accountTypeList);
   return (
     <fieldset className="border p-1 mt-1">
       <legend className="float-none w-auto mb-0">BankDetails</legend>
@@ -44,14 +40,14 @@ const BankDetails = () => {
                 inpclassname="col-xl-8"
                 selectOptionText={accountTypeList ? accountTypeList : ""}
                 values={inpValue.bankId}
-                disable={accountTypeList ? false : true}
+                // disable={accountTypeList ? false : true}
               />
             </div>
             <div className="col-12 col-sm-5">
               <InputBox
                 handleChange={handleChange}
                 label="PAN Number:"
-                id="bankAc"
+                id="panNo"
                 inptypes="text"
                 rowTypes="double"
                 labelclassname="col-xl-6"
@@ -79,7 +75,7 @@ const BankDetails = () => {
               <InputBox
                 handleChange={handleChange}
                 label="BankAccount:"
-                id="bankacc"
+                id="bankAc"
                 inptypes="text"
                 rowTypes="double"
                 labelclassname="col-xl-6"

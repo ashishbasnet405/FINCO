@@ -31,22 +31,23 @@ const _nav = [
     },
   },
 
-  {
-    component: CNavTitle,
-    name: "Details",
-    to: "/details/offices",
-  },
+  // {
+  //   component: CNavTitle,
+  //   name: "Details",
+  //   to: "/details/offices",
+  // },
   {
     component: CNavItem,
     name: "Offices",
-    to: "/details/offices",
+    to: "/offices",
     icon: <CIcon icon={cilLibraryBuilding} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: "Staff",
-    to: "/details/staff",
+    to: "/staff",
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    breadcrumb: "Staffs",
   },
   // {
   //   component: CNavItem,
@@ -57,7 +58,7 @@ const _nav = [
   {
     component: CNavItem,
     name: "Members",
-    to: "/details/members",
+    to: "/members",
     icon: <CIcon icon={cilBlind} customClassName="nav-icon" />,
   },
 ];
